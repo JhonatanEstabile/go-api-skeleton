@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+  go-app:
+    image: go-app:latest
+    container_name: go-app
+    ports:
+      - 80:80
+
+networks:
+    default:
+        name: theio-network
+
