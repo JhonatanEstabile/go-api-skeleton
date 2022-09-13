@@ -5,8 +5,3 @@ services:
     container_name: go-app
     ports:
       - 80:80
-
-networks:
-    default:
-        name: theio-network
-
