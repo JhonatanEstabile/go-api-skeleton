@@ -1,13 +1,16 @@
 package controller
 
 import (
+	"api/mocks"
 	"database/sql"
 	"errors"
+	"fmt"
 	"net/http/httptest"
 	"strings"
 	"testing"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/stretchr/testify/mock"
 )
 
 type baseControllerMock struct{}
@@ -35,17 +38,55 @@ func (uMock *userMock) CreateUser(name string, email string) (sql.Result, error)
 	return nil, err
 }
 
-func TestNewUserController(t *testing.T) {
-	userController := NewUserController()
-	if userController == nil {
-		t.Error("Request should return 500 status code")
-	}
-}
+// func TestNewUserController(t *testing.T) {
+// 	userController := NewUserController()
+// 	if userController == nil {
+// 		t.Error("Request should return 500 status code")
+// 	}
+// }
 
-func TestCreateUserErrorToInsert(t *testing.T) {
+// func TestCreateUserErrorToInsert(t *testing.T) {
+// 	userController := UserController{
+// 		base:       &baseControllerMock{},
+// 		repository: &userMock{},
+// 	}
+
+// 	app := fiber.New()
+// 	app.Post("/user", userController.CreateUser)
+
+// 	bodyReader := strings.NewReader(`{"name":"test error", "email":"test@test.com"}`)
+// 	req := httptest.NewRequest("POST", "/user", bodyReader)
+// 	req.Header.Set("Content-Type", "application/json")
+
+// 	res, err := app.Test(req, -1)
+// 	if res.StatusCode != 500 || err != nil {
+// 		t.Error("Request should return 500 status code")
+// 	}
+// }
+
+func TestCreateUserErrorToInsertMockeryV2(t *testing.T) {
+	baseCtrlMock := mocks.NewIBaseController(t)
+
+	baseCtrlMock.
+		EXPECT().
+		GetData(mock.Anything, mock.Anything).
+		Once().
+		Run(func(args mock.Arguments) {
+			fmt.Println(args...)
+		}).
+		Return([]string{})
+
+	repoMock := mocks.NewIUser(t)
+	repoMock.EXPECT().CreateUser(
+		"",
+		"",
+	).
+		Run(func(name, email string) { fmt.Println(name, email) }).
+		Return(nil, errors.New("test"))
+
 	userController := UserController{
-		base:       &baseControllerMock{},
-		repository: &userMock{},
+		base:       baseCtrlMock,
+		repository: repoMock,
 	}
 
 	app := fiber.New()
@@ -61,40 +102,40 @@ func TestCreateUserErrorToInsert(t *testing.T) {
 	}
 }
 
-func TestCreateUserErrorInvalidPayload(t *testing.T) {
-	userController := UserController{
-		base:       &baseControllerMock{},
-		repository: &userMock{},
-	}
+// func TestCreateUserErrorInvalidPayload(t *testing.T) {
+// 	userController := UserController{
+// 		base:       &baseControllerMock{},
+// 		repository: &userMock{},
+// 	}
 
-	app := fiber.New()
-	app.Post("/user", userController.CreateUser)
+// 	app := fiber.New()
+// 	app.Post("/user", userController.CreateUser)
 
-	bodyReader := strings.NewReader(`{"names":"test", "emails":"test@test.com"}`)
-	req := httptest.NewRequest("POST", "/user", bodyReader)
-	req.Header.Set("Content-Type", "application/json")
+// 	bodyReader := strings.NewReader(`{"names":"test", "emails":"test@test.com"}`)
+// 	req := httptest.NewRequest("POST", "/user", bodyReader)
+// 	req.Header.Set("Content-Type", "application/json")
 
-	res, err := app.Test(req, -1)
-	if res.StatusCode != 500 || err != nil {
-		t.Errorf("Request should return 500 status code returned: %d", res.StatusCode)
-	}
-}
+// 	res, err := app.Test(req, -1)
+// 	if res.StatusCode != 500 || err != nil {
+// 		t.Errorf("Request should return 500 status code returned: %d", res.StatusCode)
+// 	}
+// }
 
-func TestCreateUser(t *testing.T) {
-	userController := UserController{
-		base:       &baseControllerMock{},
-		repository: &userMock{},
-	}
+// func TestCreateUser(t *testing.T) {
+// 	userController := UserController{
+// 		base:       &baseControllerMock{},
+// 		repository: &userMock{},
+// 	}
 
-	app := fiber.New()
-	app.Post("/user", userController.CreateUser)
+// 	app := fiber.New()
+// 	app.Post("/user", userController.CreateUser)
 
-	bodyReader := strings.NewReader(`{"name":"test", "email":"test@test.com"}`)
-	req := httptest.NewRequest("POST", "/user", bodyReader)
-	req.Header.Set("Content-Type", "application/json")
+// 	bodyReader := strings.NewReader(`{"name":"test", "email":"test@test.com"}`)
+// 	req := httptest.NewRequest("POST", "/user", bodyReader)
+// 	req.Header.Set("Content-Type", "application/json")
 
-	res, err := app.Test(req, -1)
-	if res.StatusCode != 201 || err != nil {
-		t.Errorf("Request should return 201 status code returned: %d", res.StatusCode)
-	}
-}
+// 	res, err := app.Test(req, -1)
+// 	if res.StatusCode != 201 || err != nil {
+// 		t.Errorf("Request should return 201 status code returned: %d", res.StatusCode)
+// 	}
+// }
