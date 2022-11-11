@@ -2,7 +2,6 @@ package controller
 
 import (
 	"api/configs"
-	"fmt"
 	"net/http"
 	"os"
 	"time"
@@ -36,9 +35,6 @@ func (controller *AuthController) Login(c *fiber.Ctx) error {
 	authTokens := configs.GetTokens()
 
 	data, exists := authTokens[login.Token]
-
-	fmt.Println(login)
-	fmt.Println(data)
 
 	if !exists ||
 		data.Secret != login.Secret {

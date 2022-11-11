@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"api/models"
 	"api/repository"
 	"net/http"
 
@@ -19,14 +20,9 @@ type UserController struct {
 	repository repository.IUser
 }
 
-type userReqBody struct {
-	Name  string `json:"name" validate:"required,min=3,max=32"`
-	Email string `json:"email" validate:"required,email"`
-}
-
-func (usrCtrl *UserController) CreateUser(c *fiber.Ctx) error {
-	user := userReqBody{}
-	errors := usrCtrl.base.GetData(
+func (ctrl *UserController) Create(c *fiber.Ctx) error {
+	user := models.User{}
+	errors := ctrl.base.GetData(
 		c,
 		&user,
 	)
@@ -35,10 +31,7 @@ func (usrCtrl *UserController) CreateUser(c *fiber.Ctx) error {
 		return nil
 	}
 
-	_, err := usrCtrl.repository.CreateUser(
-		user.Name,
-		user.Email,
-	)
+	_, err := ctrl.repository.Create(&user)
 
 	if err != nil {
 		return err
@@ -48,5 +41,86 @@ func (usrCtrl *UserController) CreateUser(c *fiber.Ctx) error {
 		Status(http.StatusCreated).
 		JSON(fiber.Map{
 			"success": true,
+		})
+}
+
+func (ctrl *UserController) List(c *fiber.Ctx) error {
+	users := ctrl.repository.List()
+
+	return c.
+		Status(http.StatusOK).
+		JSON(fiber.Map{
+			"success": true,
+			"data":    users,
+		})
+}
+
+func (ctrl *UserController) Detail(c *fiber.Ctx) error {
+	id := c.Params("id")
+	user := ctrl.repository.Detail(id)
+
+	return c.
+		Status(http.StatusOK).
+		JSON(fiber.Map{
+			"success": true,
+			"data":    user,
+		})
+}
+
+func (ctrl *UserController) Delete(c *fiber.Ctx) error {
+	id := c.Params("id")
+
+	err := ctrl.repository.Delete(id)
+
+	if err != nil {
+		return c.
+			Status(http.StatusInternalServerError).
+			JSON(fiber.Map{
+				"success": false,
+				"data":    "Error to delete data",
+			})
+	}
+
+	return c.
+		SendStatus(http.StatusOK)
+}
+
+func (ctrl *UserController) Update(c *fiber.Ctx) error {
+	id := c.Params("id")
+
+	userData := ctrl.repository.Detail(id)
+	if userData == nil {
+		return c.
+			Status(http.StatusNotFound).
+			JSON(fiber.Map{
+				"success": false,
+				"data":    "User not found",
+			})
+	}
+
+	errors := ctrl.base.GetData(
+		c,
+		userData,
+	)
+	if len(errors) > 0 {
+		return nil
+	}
+
+	err := ctrl.repository.Update(id, userData)
+
+	if err != nil {
+		return c.
+			Status(http.StatusBadRequest).
+			JSON(fiber.Map{
+				"success": false,
+				"data":    "Error to update data",
+			})
+	}
+
+	return c.
+		Status(http.StatusOK).
+		JSON(fiber.Map{
+			"success": true,
+			"data":    userData,
 		})
 }

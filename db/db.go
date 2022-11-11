@@ -1,7 +1,6 @@
 package db
 
 import (
-	"database/sql"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -10,14 +9,15 @@ import (
 	"time"
 
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/jmoiron/sqlx"
 	"github.com/qustavo/dotsql"
 )
 
-var client *sql.DB
+var client *sqlx.DB
 
 func Connect() {
 	var err error
-	client, err = sql.Open("mysql", getConnectionUrl())
+	client, err = sqlx.Connect("mysql", getConnectionUrl())
 	if err != nil {
 		log.Fatalf("Erro ao conectar no banco de dados: %s", err.Error())
 	}
@@ -33,7 +33,7 @@ func Close() {
 	client.Close()
 }
 
-func GetClient() *sql.DB {
+func GetClient() *sqlx.DB {
 	return client
 }
 
