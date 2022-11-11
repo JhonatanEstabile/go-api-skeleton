@@ -15,5 +15,10 @@ func setPublicRoutes(app *fiber.App) {
 	userController := controller.NewUserController()
 
 	app.Post("/login", authController.Login)
-	app.Post("/user", userController.CreateUser)
+
+	app.Post("/user", userController.Create)
+	app.Get("/user", userController.List)
+	app.Get("/user/:id", userController.Detail)
+	app.Patch("/user/:id", userController.Update)
+	app.Delete("/user/:id", userController.Delete)
 }

@@ -14,6 +14,7 @@ require (
 	github.com/gofiber/fiber/v2 v2.35.0 // indirect
 	github.com/gofiber/jwt/v3 v3.2.13 // indirect
 	github.com/golang-jwt/jwt/v4 v4.4.2 // indirect
+	github.com/jmoiron/sqlx v1.3.5 // indirect
 	github.com/joho/godotenv v1.4.0 // indirect
 	github.com/klauspost/compress v1.15.9 // indirect
 	github.com/klauspost/cpuid/v2 v2.1.0 // indirect

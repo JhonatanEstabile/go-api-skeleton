@@ -29,5 +29,5 @@ func main() {
 
 	routes.SetRoutes(app)
 
-	app.Listen(":80")
+	app.Listen("127.0.0.1:8080")
 }
