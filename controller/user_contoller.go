@@ -90,18 +90,18 @@ func (ctrl *UserController) Update(c *fiber.Ctx) error {
 
 	userData := ctrl.repository.Detail(id)
 	if userData == nil {
-		return c.
-			Status(http.StatusNotFound).
-			JSON(fiber.Map{
-				"success": false,
-				"data":    "User not found",
-			})
+		return ctrl.base.Response(
+			c,
+			http.StatusNotFound,
+			"User not found",
+		)
 	}
 
 	errors := ctrl.base.GetData(
 		c,
 		userData,
 	)
+
 	if len(errors) > 0 {
 		return nil
 	}
@@ -109,18 +109,16 @@ func (ctrl *UserController) Update(c *fiber.Ctx) error {
 	err := ctrl.repository.Update(id, userData)
 
 	if err != nil {
-		return c.
-			Status(http.StatusBadRequest).
-			JSON(fiber.Map{
-				"success": false,
-				"data":    "Error to update data",
-			})
+		return ctrl.base.Response(
+			c,
+			http.StatusBadRequest,
+			"Error to update data",
+		)
 	}
 
-	return c.
-		Status(http.StatusOK).
-		JSON(fiber.Map{
-			"success": true,
-			"data":    userData,
-		})
+	return ctrl.base.Response(
+		c,
+		http.StatusOK,
+		userData,
+	)
 }

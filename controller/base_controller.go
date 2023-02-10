@@ -9,6 +9,7 @@ import (
 
 type IBaseController interface {
 	GetData(*fiber.Ctx, interface{}) []string
+	Response(c *fiber.Ctx, statusCode int, data interface{}) error
 }
 
 type baseController struct{}
@@ -48,4 +49,23 @@ func (base *baseController) GetData(
 	}
 
 	return errors
+}
+
+func (base *baseController) Response(
+	c *fiber.Ctx,
+	statusCode int,
+	data interface{},
+) error {
+	var success bool = true
+
+	if statusCode > 299 && statusCode < 505 {
+		success = false
+	}
+
+	return c.
+		Status(statusCode).
+		JSON(fiber.Map{
+			"success": success,
+			"data":    data,
+		})
 }
