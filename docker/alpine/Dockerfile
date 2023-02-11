@@ -4,22 +4,20 @@ WORKDIR /app
 
 COPY . .
 
-RUN touch .env
-
 RUN go mod download
 
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build \
-    -ldflags="-w -s" -o /api 
+RUN go build -o /api
 
 ## Deploy
-FROM scratch
+FROM alpine:latest
 
 WORKDIR /
 
 COPY --from=build /api /api
-COPY --from=build /app/.env .env
 COPY --from=build /app/queries /queries
+
+RUN touch .env
 
 EXPOSE 8080
 
-ENTRYPOINT ["/api"]
+ENTRYPOINT ["./api"]

@@ -1,3 +1,4 @@
 .env
 coverate.out
 .vscode/
+storage/.db

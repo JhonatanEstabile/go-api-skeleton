@@ -1,4 +1,3 @@
-
 -- name: create-users-table
 CREATE TABLE IF NOT EXISTS `users` (
   `id` char(26) COLLATE utf8mb4_unicode_ci NOT NULL,

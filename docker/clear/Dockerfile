@@ -2,15 +2,15 @@ FROM clearlinux/golang:1.18
 
 WORKDIR /app
 
-COPY go.mod ./
-COPY go.sum ./
+COPY . .
 
 RUN go mod download
 
-COPY . .
 
-RUN go build -o /go-app
+RUN go build .
 
-EXPOSE 80
+RUN touch .env
 
-CMD [ "/go-app" ]
+EXPOSE 8080
+
+CMD [ "./api" ]
