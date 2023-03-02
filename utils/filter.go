@@ -19,13 +19,13 @@ func ParseQueryParams(queryString string) (string, []interface{}) {
 		parts := strings.Split(queryParam, ",")
 		if len(parts) == 2 {
 			result = append(result, QueryParam{
-				Field:    parts[0],
+				Field:    decodeQueryParam(parts[0]),
 				Operator: decodeQueryParam(parts[1]),
 				Filter:   "",
 			})
 		} else if len(parts) == 3 {
 			result = append(result, QueryParam{
-				Field:    parts[0],
+				Field:    decodeQueryParam(parts[0]),
 				Operator: decodeQueryParam(parts[1]),
 				Filter:   parts[2],
 			})
