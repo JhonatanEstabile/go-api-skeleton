@@ -3,6 +3,7 @@ package controller
 import (
 	"api/models"
 	"api/repository"
+	"api/utils"
 	"net/http"
 
 	"github.com/gofiber/fiber/v2"
@@ -45,7 +46,9 @@ func (ctrl *UserController) Create(c *fiber.Ctx) error {
 }
 
 func (ctrl *UserController) List(c *fiber.Ctx) error {
-	users := ctrl.repository.List()
+	where, args := utils.ParseQueryParams(string(c.Request().URI().QueryString()))
+
+	users := ctrl.repository.List(where, args)
 
 	return c.
 		Status(http.StatusOK).
