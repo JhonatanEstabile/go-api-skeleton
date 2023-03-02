@@ -12,7 +12,7 @@ import (
 
 type IUser interface {
 	Create(userData *models.User) (sql.Result, error)
-	List() *[]models.User
+	List(query string, args []interface{}) *[]models.User
 	Detail(id string) *models.User
 	Delete(id string) error
 	Update(id string, userData *models.User) error
@@ -48,11 +48,10 @@ func (user *user) Create(userData *models.User) (sql.Result, error) {
 	)
 }
 
-func (user *user) List() *[]models.User {
+func (user *user) List(query string, args []interface{}) *[]models.User {
 	rows, err := user.db.Queryx(
-		`
-			SELECT * FROM users
-		`,
+		`SELECT * FROM users `+query,
+		args...,
 	)
 
 	if err != nil {
