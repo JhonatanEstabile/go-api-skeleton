@@ -2,7 +2,6 @@ package utils
 
 import (
 	"fmt"
-	"log"
 	"net/url"
 	"strings"
 )
@@ -21,13 +20,13 @@ func ParseQueryParams(queryString string) (string, []interface{}) {
 		if len(parts) == 2 {
 			result = append(result, QueryParam{
 				Field:    parts[0],
-				Operator: parts[1],
+				Operator: decodeQueryParam(parts[1]),
 				Filter:   "",
 			})
 		} else if len(parts) == 3 {
 			result = append(result, QueryParam{
 				Field:    parts[0],
-				Operator: parts[1],
+				Operator: decodeQueryParam(parts[1]),
 				Filter:   parts[2],
 			})
 		}
@@ -49,7 +48,7 @@ func ParseQueryParams(queryString string) (string, []interface{}) {
 func decodeQueryParam(param string) string {
 	decoded, err := url.QueryUnescape(param)
 	if err != nil {
-		log.Fatal(err)
+		return ""
 	}
 	return decoded
 }
