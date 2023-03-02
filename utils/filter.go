@@ -2,6 +2,8 @@ package utils
 
 import (
 	"fmt"
+	"log"
+	"net/url"
 	"strings"
 )
 
@@ -35,11 +37,19 @@ func ParseQueryParams(queryString string) (string, []interface{}) {
 	var args []interface{}
 	for _, qp := range result {
 		whereClause = append(whereClause, fmt.Sprintf("%s %s ?", qp.Field, qp.Operator))
-		args = append(args, qp.Filter)
+		args = append(args, decodeQueryParam(qp.Filter))
 	}
 	where := ""
 	if len(whereClause) > 0 {
 		where = "WHERE " + strings.Join(whereClause, " AND ")
 	}
 	return where, args
+}
+
+func decodeQueryParam(param string) string {
+	decoded, err := url.QueryUnescape(param)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return decoded
 }
