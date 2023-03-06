@@ -3,8 +3,6 @@ package utils
 import (
 	"reflect"
 	"strings"
-
-	"github.com/go-playground/validator/v10"
 )
 
 var validationMessages = map[string]string{
