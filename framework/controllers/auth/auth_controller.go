@@ -1,17 +1,17 @@
-package controller
+package auth
 
 import (
-	"api/configs"
+	"api/framework/configs"
+	"api/framework/controllers"
+	"github.com/gofiber/fiber/v2"
+	"github.com/golang-jwt/jwt/v4"
 	"net/http"
 	"os"
 	"time"
-
-	"github.com/gofiber/fiber/v2"
-	"github.com/golang-jwt/jwt/v4"
 )
 
 type AuthController struct {
-	base IBaseController
+	base controllers.IBaseController
 }
 
 type LoginData struct {
@@ -21,7 +21,7 @@ type LoginData struct {
 
 func NewAuthController() *AuthController {
 	return &AuthController{
-		base: NewBaseController(),
+		base: controllers.NewBaseController(),
 	}
 }
 

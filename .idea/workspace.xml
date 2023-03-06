@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5e6f4455-feae-43a8-bc26-15ea6204eb6d" name="Changes" comment="chore: refactor 1/5 wip">
+      <change beforePath="$PROJECT_DIR$/.vscode/launch.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/token.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/auth_controller.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/base_controller.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/user_contoller.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/user_controller_test.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/db.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/alpine/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/clear/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/scratch/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mocks/IBaseController.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mocks/IUser.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/user.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysql-db/01-database.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/queries/migrations/migrations.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/queries/migrations/tables.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repository/user.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/private_routes.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/public_routes.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/routes.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/filter.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/validator.go" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
+  </component>
+  <component name="GOROOT" url="file:///snap/go/10050" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="a97f633f-509b-41bc-a30e-e1cd841babf0" />
+        <option name="url" value="https://github.com/JhonatanEstabile/go-api-skeleton.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="GoLibraries">
+    <option name="indexEntireGoPath" value="false" />
+  </component>
+  <component name="KubernetesApiPersistence">
+    <option name="context" value="kind-kind" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2MVbRgequsiw2jcI6GzNMwtW4SW" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultGoTemplateProperty" value="Go File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="TF_FMT" value="false" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="go.format.on.save.advertiser.fired" value="true" />
+    <property name="go.formatter.settings.were.checked" value="true" />
+    <property name="go.import.settings.migrated" value="true" />
+    <property name="go.modules.go.list.on.any.changes.was.set" value="true" />
+    <property name="go.sdk.automatically.set" value="true" />
+    <property name="go.watchers.conflict.with.on.save.actions.check.performed" value="true" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Projetos/gladys" />
+    <property name="settings.editor.selected.configurable" value="go" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/framework/controllers/user" />
+      <recent name="$PROJECT_DIR$/framework/controllers/auth" />
+      <recent name="$PROJECT_DIR$/dependencies/repositories/mysql" />
+      <recent name="$PROJECT_DIR$/dependencies/repositories/user" />
+      <recent name="$PROJECT_DIR$/dependencies/repositories" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="chore: refactor 1/5 wip" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: refactor 1/5 wip" />
+  </component>
+  <component name="VgoProject">
+    <integration-enabled>true</integration-enabled>
+  </component>
+</project>

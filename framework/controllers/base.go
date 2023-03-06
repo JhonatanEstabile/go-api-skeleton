@@ -1,10 +1,9 @@
-package controller
+package controllers
 
 import (
-	"api/utils"
-	"net/http"
-
+	"api/framework/utils"
 	"github.com/gofiber/fiber/v2"
+	"net/http"
 )
 
 type IBaseController interface {

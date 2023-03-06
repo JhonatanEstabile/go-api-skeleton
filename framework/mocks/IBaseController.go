@@ -42,8 +42,8 @@ type IBaseController_GetData_Call struct {
 }
 
 // GetData is a helper method to define mock.On call
-//  - _a0 *fiber.Ctx
-//  - _a1 interface{}
+//   - _a0 *fiber.Ctx
+//   - _a1 interface{}
 func (_e *IBaseController_Expecter) GetData(_a0 interface{}, _a1 interface{}) *IBaseController_GetData_Call {
 	return &IBaseController_GetData_Call{Call: _e.mock.On("GetData", _a0, _a1)}
 }

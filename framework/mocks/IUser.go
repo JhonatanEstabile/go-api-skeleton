@@ -50,8 +50,8 @@ type IUser_CreateUser_Call struct {
 }
 
 // CreateUser is a helper method to define mock.On call
-//  - name string
-//  - email string
+//   - name string
+//   - email string
 func (_e *IUser_Expecter) CreateUser(name interface{}, email interface{}) *IUser_CreateUser_Call {
 	return &IUser_CreateUser_Call{Call: _e.mock.On("CreateUser", name, email)}
 }
